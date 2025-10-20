@@ -4,11 +4,13 @@
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
                 <a href="#" class="flex items-center space-x-3 group">
-                    <div class="bg-biblioteca-600 p-2 rounded-lg group-hover:bg-biblioteca-500 transition-colors">
-                        <i class="bi bi-book-half text-2xl"></i>
-                    </div>
                     <div>
-                        <h1 class="logo-text text-2xl font-bold">Biblioteca Virtual</h1>
+                        <img src="{{ asset('imagens/logo_icon_branco.png') }}" alt="Logo Vellum"
+                             class="w-14 h-14 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                    </div>
+
+                    <div>
+                        <h1 class="logo-text text-2xl font-bold">Vellum</h1>
                         <p class="text-biblioteca-200 text-sm">O seu refúgio literário</p>
                     </div>
                 </a>
@@ -44,8 +46,7 @@
 
     <footer class="bg-biblioteca-800 text-biblioteca-200 text-center p-6 mt-auto">
         <div class="container mx-auto">
-            <p>&copy; 2023 Biblioteca Virtual. Todos os direitos reservados.</p>
-            <p class="mt-2 text-sm">Desenvolvido com <i class="bi bi-heart-fill text-red-400"></i> para amantes da leitura</p>
+            <p>&copy; 2025 Vellum. Todos os direitos reservados.</p>
         </div>
     </footer>
 
