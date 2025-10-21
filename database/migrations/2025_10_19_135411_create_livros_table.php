@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('livros', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
+            $table->text('titulo');
             $table->text('resumo')->nullable();
             $table->unsignedInteger('numero_downloads')->default(0);
             $table->timestamps();
