@@ -2,24 +2,24 @@
 
 namespace Database\Seeders;
 
+use App\Models\Livro;
 use App\Models\User;
+use App\Services\ApiLivrosService;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use function Webmozart\Assert\Tests\StaticAnalysis\integer;
 
 class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
 
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $apiLivros = app(ApiLivrosService::class);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $livrosPorPagina = iterator_to_array($apiLivros->buscarPaginas('books', 10));
+
+        $this->callWith(LivroSeeder::class, ['livrosPorPagina' => $livrosPorPagina]);
+        //$this->callWith(AutorSeeder::class, ['livrosPorPagina' => $livrosPorPagina]);
     }
 }
