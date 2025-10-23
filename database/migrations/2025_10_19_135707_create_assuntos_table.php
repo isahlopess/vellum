@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('assuntos', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('nome')->unique();
             $table->timestamps();
         });
     }

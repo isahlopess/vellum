@@ -9,15 +9,16 @@ return new class extends Migration
 
     public function up(): void
     {
-            Schema::create('livro_estantes', function (Blueprint $table) {
+           Schema::create('idioma_livro', function (Blueprint $table) {
             $table->foreignId('livro_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('estante_id')->constrained()->cascadeOnDelete();
-            $table->primary(['livro_id', 'estante_id']);
+            $table->foreignId('idioma_id')->constrained()->cascadeOnDelete();
+            $table->primary(['livro_id', 'idioma_id']);
         });
     }
 
+
     public function down(): void
     {
-        Schema::dropIfExists('livro_estantes');
+        Schema::dropIfExists('idioma_livro');
     }
 };
