@@ -2,7 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Assunto;
+use App\Models\Estante;
+use App\Models\Formato;
+use App\Models\Idioma;
 use App\Models\Livro;
+use App\Models\Autor;
 use App\Services\ApiLivrosService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
@@ -16,37 +21,66 @@ class LivroSeeder extends Seeder
             echo "Inserindo livros da página " . ($pagina + 1) . "...\n";
 
             foreach ($livrosPagina as $livro) {
+
                 $tituloTraduzido = $this->traduzirTexto($livro['title']);
 
-                $assuntos = $livro['subjects'] ?? [];
-                $textoAssuntos = implode('; ', array_slice($assuntos, 0, 3));
+                $resumo = $livro['summaries'][0] ?? '';
+                $textoResumo = is_array($resumo)
+                    ? implode('; ', array_slice($resumo, 0, 3))
+                    : $resumo;
 
-                $resumoTraduzido = null;
-                if (!empty($textoAssuntos)) {
-                    $resumoTraduzido = $this->traduzirTexto($textoAssuntos);
-                }
+                $resumoTraduzido = !empty($textoResumo)
+                    ? $this->traduzirTexto($textoResumo)
+                    : null;
 
-                $dados = [
+                $livroCriado = Livro::create([
                     'titulo' => $tituloTraduzido,
                     'numero_downloads' => $livro['download_count'],
                     'resumo' => $resumoTraduzido
-                ];
+                ]);
 
-                Livro::create($dados);
+                foreach ($livro['authors'] as $autorData) {
+                    $autor = Autor::firstOrCreate(
+                        ['nome' => $autorData['name'] ?? 'Desconhecido'],
+                        [
+                            'dt_nascimento' => $autorData['birth_year'] ?? null,
+                            'dt_falecimento' => $autorData['death_year'] ?? null
+                        ]
+                    );
+                    $livroCriado->autores()->attach($autor->id);
+                }
+                foreach($livro['bookshelves'] as $estanteData) {
+                    $estante = Estante::firstOrCreate(['nome' => $estanteData]);
+                    $livroCriado->estantes()->attach($estante->id);
+                }
+                foreach($livro['languages'] as $idiomaData){
+                    $idioma = Idioma::firstOrCreate(['code' => $idiomaData]);
+                    $livroCriado->idiomas()->attach($idioma->id);
+                }
+                foreach($livro['subjects'] as $assuntoData){
+                    $assunto = Assunto::firstOrCreate(['nome' => $assuntoData]);
+                    $livroCriado->assuntos()->attach($assunto->id);
+                }
+                foreach ($livro['formats'] as $mediaType => $url) {
+                    if (str_contains($mediaType, 'image/jpeg')) {
+                        Formato::firstOrCreate([
+                            'livro_id' => $livroCriado->id,
+                            'media_type' => $mediaType,
+                            'url' => $url
+                        ]);
+                    }
+                }
             }
         }
     }
 
     private function traduzirTexto(string $texto, string $target = 'pt'): string
     {
-        if (empty($texto)) {
-            return $texto;
-        }
+        if (empty($texto)) return $texto;
 
         $apiKey = env('GOOGLE_TRANSLATE_API_KEY');
         if (empty($apiKey)) {
-            echo "\nERRO GRAVE: A variável GOOGLE_TRANSLATE_API_KEY não foi encontrada.\n";
-            echo "Verifique seu arquivo .env e limpe o cache com 'php artisan config:clear'.\n";
+            echo "\nERRO: variável GOOGLE_TRANSLATE_API_KEY ausente no .env.\n";
             return $texto;
         }
 
@@ -64,28 +98,9 @@ class LivroSeeder extends Seeder
                 return $response->json('data.translations.0.translatedText');
             }
 
-            $status = $response->status();
-            $corpoErro = $response->body();
-
-            echo "\n=================================================\n";
-            echo "ERRO DE API ao traduzir: {$status}\n";
-            echo "Texto original: {$texto}\n";
-            echo "Resposta da API: {$corpoErro}\n";
-            echo "=================================================\n";
-
-            Log::error('Falha na API de Tradução', [
-                'status' => $status,
-                'response' => $corpoErro,
-                'texto' => $texto
-            ]);
-
+            echo "\nErro ao traduzir texto: {$texto}\n";
         } catch (\Exception $e) {
-            echo "\n=================================================\n";
-            echo "ERRO DE CONEXÃO HTTP ao tentar traduzir\n";
-            echo "Verifique sua conexão ou configuração de SSL (cURL).\n";
-            echo "Erro: " . $e->getMessage() . "\n";
-            echo "=================================================\n";
-            Log::error('Falha na Conexão com API de Tradução', ['erro' => $e->getMessage()]);
+            Log::error('Falha na tradução', ['erro' => $e->getMessage()]);
         }
 
         return $texto;

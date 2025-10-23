@@ -17,9 +17,8 @@ class DatabaseSeeder extends Seeder
     {
         $apiLivros = app(ApiLivrosService::class);
 
-        $livrosPorPagina = iterator_to_array($apiLivros->buscarPaginas('books', 10));
+        $livrosPorPagina = iterator_to_array($apiLivros->buscarPaginas('books', 2));
 
         $this->callWith(LivroSeeder::class, ['livrosPorPagina' => $livrosPorPagina]);
-        $this->callWith(AutorSeeder::class, ['livrosPorPagina' => $livrosPorPagina]);
     }
 }
