@@ -9,7 +9,7 @@ class ApiLivrosService
     public function buscarPaginas($endpoint, $totalPaginas = 5)
     {
         for ($pagina = 1; $pagina <= $totalPaginas; $pagina++) {
-            $url = "https://gutendex.com/{$endpoint}/?page={$pagina}";
+            $url = "https://gutendex.com/{$endpoint}/?sort=download_count&page={$pagina}";
 
             try {
                 $response = Http::timeout(60)->get($url);

@@ -50,7 +50,7 @@ class LivroSeeder extends Seeder
                     $livroCriado->autores()->attach($autor->id);
                 }
                 foreach($livro['bookshelves'] as $estanteData) {
-                    $estante = Estante::firstOrCreate(['nome' => $estanteData]);
+                    $estante = Estante::firstOrCreate(['nome' => $this->traduzirTexto($estanteData)]);
                     $livroCriado->estantes()->attach($estante->id);
                 }
                 foreach($livro['languages'] as $idiomaData){
@@ -58,7 +58,7 @@ class LivroSeeder extends Seeder
                     $livroCriado->idiomas()->attach($idioma->id);
                 }
                 foreach($livro['subjects'] as $assuntoData){
-                    $assunto = Assunto::firstOrCreate(['nome' => $assuntoData]);
+                    $assunto = Assunto::firstOrCreate(['nome' => $this->traduzirTexto($assuntoData)]);
                     $livroCriado->assuntos()->attach($assunto->id);
                 }
                 foreach ($livro['formats'] as $mediaType => $url) {
