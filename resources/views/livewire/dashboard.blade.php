@@ -13,7 +13,7 @@
             <h3 class="font-bold text-biblioteca-800 mb-2">Acervo Digital</h3>
             <p class="text-biblioteca-600 text-sm mb-4">Explore nossa coleção de livros digitais</p>
 
-            <a href="#" class="inline-block bg-biblioteca-700 text-white px-8 py-2 rounded-lg font-medium hover:bg-biblioteca-800 transition-colors duration-300">
+            <a href="{{ route('acervo') }}" class="inline-block bg-biblioteca-700 text-white px-8 py-2 rounded-lg font-medium hover:bg-biblioteca-800 transition-colors duration-300">
                 Ir
             </a>
         </div>
@@ -23,7 +23,7 @@
             <h3 class="font-bold text-biblioteca-800 mb-2">Clube do Livro</h3>
             <p class="text-biblioteca-600 text-sm mb-4">Participe de discussões literárias</p>
 
-            <a href="#" class="inline-block bg-biblioteca-700 text-white px-8 py-2 rounded-lg font-medium hover:bg-biblioteca-800 transition-colors duration-300">
+            <a href="{{ route(('clube-do-livro')) }}" class="inline-block bg-biblioteca-700 text-white px-8 py-2 rounded-lg font-medium hover:bg-biblioteca-800 transition-colors duration-300">
                 Ir
             </a>
         </div>
