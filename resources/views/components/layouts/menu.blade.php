@@ -17,7 +17,8 @@
 
                 <nav class="hidden md:block">
                     <ul class="flex space-x-8">
-                        <li><a href="#" class="nav-link active-nav font-medium text-biblioteca-100 hover:text-white py-2"><i class="bi bi-house-door mr-2"></i>Tela Inicial</a></li>
+                        <li><a href="{{ route('dashboard') }}" class="nav-link active-nav font-medium text-biblioteca-100 hover:text-white py-2"><i class="bi bi-house-door mr-2"></i>Tela Inicial</a></li>
+                        <li><a href="{{ route('acervo') }}" class="nav-link active-nav font-medium text-biblioteca-100 hover:text-white py-2"><i class="bi bi-house-door mr-2"></i>Acervo</a></li>
                         <li><a href="#" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2"><i class="bi bi-search mr-2"></i>Explorar</a></li>
                         <li><a href="#" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2"><i class="bi bi-bookmark mr-2"></i>Minha Estante</a></li>
                         <li><a href="#" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2"><i class="bi bi-person mr-2"></i>Perfil</a></li>
@@ -31,7 +32,8 @@
 
             <div id="mobile-menu" class="hidden md:hidden mt-4 pt-4 border-t border-biblioteca-700">
                 <ul class="flex flex-col space-y-4">
-                    <li><a href="#" class="nav-link active-nav font-medium text-biblioteca-100 hover:text-white py-2 block"><i class="bi bi-house-door mr-2"></i>Tela Inicial</a></li>
+                    <li><a href="{{ route('dashboard') }}" class="nav-link active-nav font-medium text-biblioteca-100 hover:text-white py-2 block"><i class="bi bi-house-door mr-2"></i>Tela Inicial</a></li>
+                    <li><a href="{{ route('acervo') }}" class="nav-link active-nav font-medium text-biblioteca-100 hover:text-white py-2 block"><i class="bi bi-house-door mr-2"></i>Acervo</a></li>
                     <li><a href="#" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2 block"><i class="bi bi-search mr-2"></i>Explorar</a></li>
                     <li><a href="#" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2 block"><i class="bi bi-bookmark mr-2"></i>Minha Estante</a></li>
                     <li><a href="#" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2 block"><i class="bi bi-person mr-2"></i>Perfil</a></li>

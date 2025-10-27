@@ -15,9 +15,12 @@ class Acervo extends Component
 
     public function mount()
     {
-        $this->livros = Livro::select('titulo', 'resumo', 'numero_downloads')
-            ->orderBy('numero_downloads', 'desc')
-            ->take(12)
+        $this->livros = Livro::select('id', 'livros.titulo', 'livros.numero_downloads')
+            ->with(['autores:id,nome',
+                'assuntos:id,nome',
+                'estantes:id,nome',
+                'formatos:id,url,media_type,livro_id'
+            ])
             ->get();
     }
 

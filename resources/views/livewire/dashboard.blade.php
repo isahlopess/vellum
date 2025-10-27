@@ -26,9 +26,201 @@
     </div>
 
     <div class="mt-12">
-        <h3 class="text-2xl font-bold text-biblioteca-800 mb-6">Destaques do Acervo</h3>
+        <h3 class="text-2xl font-bold text-biblioteca-800 mb-6">Melhores do genêro: Aventura</h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            @foreach($livros as $livro)
+            @foreach($topAventuras as $livro)
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                    @if($livro->formatos->first()?->url)
+                        <img src="{{ $livro->formatos->first()->url }}"
+                             alt="Capa do livro {{ $livro->titulo }}"
+                             class="w-full object-cover aspect-[2/3]">
+                    @else
+                        <div class="w-full bg-biblioteca-100 aspect-[2/3] flex items-center justify-center">
+                            <i class="bi bi-book text-4xl text-biblioteca-400"></i>
+                        </div>
+                    @endif
+                    <div class="p-4">
+                        <h4 class="font-bold text-biblioteca-800 text-md truncate" title="{{ $livro->titulo }}">
+                            {{ $livro->titulo }}
+                        </h4>
+                        <p class="text-biblioteca-600 text-sm truncate">
+                            @foreach($livro->autores as $autor)
+                                {{ $autor->nome }}@if(!$loop->last), @endif
+                            @endforeach
+                        </p>
+                        <p class="text-biblioteca-500 text-xs mt-2">
+                            {{ $livro->numero_downloads }} downloads
+                        </p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="mt-12">
+        <h3 class="text-2xl font-bold text-biblioteca-800 mb-6">Melhores do genêro: Romance</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            @foreach($topRomances as $livro)
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                    @if($livro->formatos->first()?->url)
+                        <img src="{{ $livro->formatos->first()->url }}"
+                             alt="Capa do livro {{ $livro->titulo }}"
+                             class="w-full object-cover aspect-[2/3]">
+                    @else
+                        <div class="w-full bg-biblioteca-100 aspect-[2/3] flex items-center justify-center">
+                            <i class="bi bi-book text-4xl text-biblioteca-400"></i>
+                        </div>
+                    @endif
+                    <div class="p-4">
+                        <h4 class="font-bold text-biblioteca-800 text-md truncate" title="{{ $livro->titulo }}">
+                            {{ $livro->titulo }}
+                        </h4>
+                        <p class="text-biblioteca-600 text-sm truncate">
+                            @foreach($livro->autores as $autor)
+                                {{ $autor->nome }}@if(!$loop->last), @endif
+                            @endforeach
+                        </p>
+                        <p class="text-biblioteca-500 text-xs mt-2">
+                            {{ $livro->numero_downloads }} downloads
+                        </p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="mt-12">
+        <h3 class="text-2xl font-bold text-biblioteca-800 mb-6">Melhores do genêro: Aventura</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            @foreach($topFantasias as $livro)
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                    @if($livro->formatos->first()?->url)
+                        <img src="{{ $livro->formatos->first()->url }}"
+                             alt="Capa do livro {{ $livro->titulo }}"
+                             class="w-full object-cover aspect-[2/3]">
+                    @else
+                        <div class="w-full bg-biblioteca-100 aspect-[2/3] flex items-center justify-center">
+                            <i class="bi bi-book text-4xl text-biblioteca-400"></i>
+                        </div>
+                    @endif
+                    <div class="p-4">
+                        <h4 class="font-bold text-biblioteca-800 text-md truncate" title="{{ $livro->titulo }}">
+                            {{ $livro->titulo }}
+                        </h4>
+                        <p class="text-biblioteca-600 text-sm truncate">
+                            @foreach($livro->autores as $autor)
+                                {{ $autor->nome }}@if(!$loop->last), @endif
+                            @endforeach
+                        </p>
+                        <p class="text-biblioteca-500 text-xs mt-2">
+                            {{ $livro->numero_downloads }} downloads
+                        </p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="mt-12">
+        <h3 class="text-2xl font-bold text-biblioteca-800 mb-6">Melhores do genêro: Downloads</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            @foreach($topDownloads as $livro)
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                    @if($livro->formatos->first()?->url)
+                        <img src="{{ $livro->formatos->first()->url }}"
+                             alt="Capa do livro {{ $livro->titulo }}"
+                             class="w-full object-cover aspect-[2/3]">
+                    @else
+                        <div class="w-full bg-biblioteca-100 aspect-[2/3] flex items-center justify-center">
+                            <i class="bi bi-book text-4xl text-biblioteca-400"></i>
+                        </div>
+                    @endif
+                    <div class="p-4">
+                        <h4 class="font-bold text-biblioteca-800 text-md truncate" title="{{ $livro->titulo }}">
+                            {{ $livro->titulo }}
+                        </h4>
+                        <p class="text-biblioteca-600 text-sm truncate">
+                            @foreach($livro->autores as $autor)
+                                {{ $autor->nome }}@if(!$loop->last), @endif
+                            @endforeach
+                        </p>
+                        <p class="text-biblioteca-500 text-xs mt-2">
+                            {{ $livro->numero_downloads }} downloads
+                        </p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="mt-12">
+        <h3 class="text-2xl font-bold text-biblioteca-800 mb-6">Melhores do genêro: Horror</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            @foreach($topHorror as $livro)
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                    @if($livro->formatos->first()?->url)
+                        <img src="{{ $livro->formatos->first()->url }}"
+                             alt="Capa do livro {{ $livro->titulo }}"
+                             class="w-full object-cover aspect-[2/3]">
+                    @else
+                        <div class="w-full bg-biblioteca-100 aspect-[2/3] flex items-center justify-center">
+                            <i class="bi bi-book text-4xl text-biblioteca-400"></i>
+                        </div>
+                    @endif
+                    <div class="p-4">
+                        <h4 class="font-bold text-biblioteca-800 text-md truncate" title="{{ $livro->titulo }}">
+                            {{ $livro->titulo }}
+                        </h4>
+                        <p class="text-biblioteca-600 text-sm truncate">
+                            @foreach($livro->autores as $autor)
+                                {{ $autor->nome }}@if(!$loop->last), @endif
+                            @endforeach
+                        </p>
+                        <p class="text-biblioteca-500 text-xs mt-2">
+                            {{ $livro->numero_downloads }} downloads
+                        </p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="mt-12">
+        <h3 class="text-2xl font-bold text-biblioteca-800 mb-6">Melhores do genêro: Ficção</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            @foreach($topFiccao as $livro)
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                    @if($livro->formatos->first()?->url)
+                        <img src="{{ $livro->formatos->first()->url }}"
+                             alt="Capa do livro {{ $livro->titulo }}"
+                             class="w-full object-cover aspect-[2/3]">
+                    @else
+                        <div class="w-full bg-biblioteca-100 aspect-[2/3] flex items-center justify-center">
+                            <i class="bi bi-book text-4xl text-biblioteca-400"></i>
+                        </div>
+                    @endif
+                    <div class="p-4">
+                        <h4 class="font-bold text-biblioteca-800 text-md truncate" title="{{ $livro->titulo }}">
+                            {{ $livro->titulo }}
+                        </h4>
+                        <p class="text-biblioteca-600 text-sm truncate">
+                            @foreach($livro->autores as $autor)
+                                {{ $autor->nome }}@if(!$loop->last), @endif
+                            @endforeach
+                        </p>
+                        <p class="text-biblioteca-500 text-xs mt-2">
+                            {{ $livro->numero_downloads }} downloads
+                        </p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="mt-12">
+        <h3 class="text-2xl font-bold text-biblioteca-800 mb-6">Melhores do genêro: Ficção</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            @foreach($topHistoria as $livro)
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
                     @if($livro->formatos->first()?->url)
                         <img src="{{ $livro->formatos->first()->url }}"
