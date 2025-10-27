@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+
 <div class="mx-auto">
     <h2 class="text-3xl font-bold text-biblioteca-800 mb-6 text-center">Bem-vindo à Biblioteca Vellum!</h2>
     <div class="bg-white rounded-xl shadow-md p-6 mb-8 border border-biblioteca-200 text-center">
@@ -26,226 +30,150 @@
     </div>
 
     <div class="mt-12">
-        <h3 class="text-2xl font-bold text-biblioteca-800 mb-6">Melhores do genêro: Aventura</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            @foreach($topAventuras as $livro)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                    @if($livro->formatos->first()?->url)
-                        <img src="{{ $livro->formatos->first()->url }}"
-                             alt="Capa do livro {{ $livro->titulo }}"
-                             class="w-full object-cover aspect-[2/3]">
-                    @else
-                        <div class="w-full bg-biblioteca-100 aspect-[2/3] flex items-center justify-center">
-                            <i class="bi bi-book text-4xl text-biblioteca-400"></i>
-                        </div>
-                    @endif
-                    <div class="p-4">
-                        <h4 class="font-bold text-biblioteca-800 text-md truncate" title="{{ $livro->titulo }}">
-                            {{ $livro->titulo }}
-                        </h4>
-                        <p class="text-biblioteca-600 text-sm truncate">
-                            @foreach($livro->autores as $autor)
-                                {{ $autor->nome }}@if(!$loop->last), @endif
-                            @endforeach
-                        </p>
-                        <p class="text-biblioteca-500 text-xs mt-2">
-                            {{ $livro->numero_downloads }} downloads
-                        </p>
-                    </div>
-                </div>
-            @endforeach
-        </div>
+        <h3 id="downloads-title" class="text-2xl font-bold text-biblioteca-800 mb-6 flex items-center gap-2">
+            <i class="bi bi-graph-up"></i>
+            <span>Top Livros com + Downloads</span>
+        </h3>
+        <section class="splide book-carousel" aria-labelledby="downloads-title">
+            <div class="splide__track">
+                <ul class="splide__list">
+
+                    @foreach($topDownloads as $livro)
+                        <x-livro-card :livro="$livro" />
+                    @endforeach
+
+                </ul>
+            </div>
+        </section>
     </div>
 
     <div class="mt-12">
-        <h3 class="text-2xl font-bold text-biblioteca-800 mb-6">Melhores do genêro: Romance</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            @foreach($topRomances as $livro)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                    @if($livro->formatos->first()?->url)
-                        <img src="{{ $livro->formatos->first()->url }}"
-                             alt="Capa do livro {{ $livro->titulo }}"
-                             class="w-full object-cover aspect-[2/3]">
-                    @else
-                        <div class="w-full bg-biblioteca-100 aspect-[2/3] flex items-center justify-center">
-                            <i class="bi bi-book text-4xl text-biblioteca-400"></i>
-                        </div>
-                    @endif
-                    <div class="p-4">
-                        <h4 class="font-bold text-biblioteca-800 text-md truncate" title="{{ $livro->titulo }}">
-                            {{ $livro->titulo }}
-                        </h4>
-                        <p class="text-biblioteca-600 text-sm truncate">
-                            @foreach($livro->autores as $autor)
-                                {{ $autor->nome }}@if(!$loop->last), @endif
-                            @endforeach
-                        </p>
-                        <p class="text-biblioteca-500 text-xs mt-2">
-                            {{ $livro->numero_downloads }} downloads
-                        </p>
-                    </div>
-                </div>
-            @endforeach
-        </div>
+        <h3 id="aventura-title" class="text-2xl font-bold text-biblioteca-800 mb-6 flex items-center gap-2">
+            <i class="bi bi-compass"></i>
+            <span>Melhores do genêro: Aventura</span>
+        </h3>
+        <section class="splide book-carousel" aria-labelledby="aventura-title">
+            <div class="splide__track">
+                <ul class="splide__list">
+
+                    @foreach($topAventuras as $livro)
+                        <x-livro-card :livro="$livro" />
+                    @endforeach
+
+                </ul>
+            </div>
+        </section>
+    </div>
+
+
+    <div class="mt-12">
+        <h3 id="romance-title" class="text-2xl font-bold text-biblioteca-800 mb-6 flex items-center gap-2">
+            <i class="bi bi-heart"></i>
+            <span>Melhores do genêro: Romance</span>
+        </h3>
+        <section class="splide book-carousel" aria-labelledby="romance-title">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    @foreach($topRomances as $livro)
+                        <x-livro-card :livro="$livro" />
+                    @endforeach
+                </ul>
+            </div>
+        </section>
     </div>
 
     <div class="mt-12">
-        <h3 class="text-2xl font-bold text-biblioteca-800 mb-6">Melhores do genêro: Aventura</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            @foreach($topFantasias as $livro)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                    @if($livro->formatos->first()?->url)
-                        <img src="{{ $livro->formatos->first()->url }}"
-                             alt="Capa do livro {{ $livro->titulo }}"
-                             class="w-full object-cover aspect-[2/3]">
-                    @else
-                        <div class="w-full bg-biblioteca-100 aspect-[2/3] flex items-center justify-center">
-                            <i class="bi bi-book text-4xl text-biblioteca-400"></i>
-                        </div>
-                    @endif
-                    <div class="p-4">
-                        <h4 class="font-bold text-biblioteca-800 text-md truncate" title="{{ $livro->titulo }}">
-                            {{ $livro->titulo }}
-                        </h4>
-                        <p class="text-biblioteca-600 text-sm truncate">
-                            @foreach($livro->autores as $autor)
-                                {{ $autor->nome }}@if(!$loop->last), @endif
-                            @endforeach
-                        </p>
-                        <p class="text-biblioteca-500 text-xs mt-2">
-                            {{ $livro->numero_downloads }} downloads
-                        </p>
-                    </div>
-                </div>
-            @endforeach
-        </div>
+        <h3 id="fantasia-title" class="text-2xl font-bold text-biblioteca-800 mb-6 flex items-center gap-2">
+            <i class="bi bi-magic"></i>
+            <span>Melhores do genêro: Fantasia</span>
+        </h3>
+        <section class="splide book-carousel" aria-labelledby="fantasia-title">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    @foreach($topFantasias as $livro)
+                        <x-livro-card :livro="$livro" />
+                    @endforeach
+                </ul>
+            </div>
+        </section>
     </div>
 
     <div class="mt-12">
-        <h3 class="text-2xl font-bold text-biblioteca-800 mb-6">Melhores do genêro: Downloads</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            @foreach($topDownloads as $livro)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                    @if($livro->formatos->first()?->url)
-                        <img src="{{ $livro->formatos->first()->url }}"
-                             alt="Capa do livro {{ $livro->titulo }}"
-                             class="w-full object-cover aspect-[2/3]">
-                    @else
-                        <div class="w-full bg-biblioteca-100 aspect-[2/3] flex items-center justify-center">
-                            <i class="bi bi-book text-4xl text-biblioteca-400"></i>
-                        </div>
-                    @endif
-                    <div class="p-4">
-                        <h4 class="font-bold text-biblioteca-800 text-md truncate" title="{{ $livro->titulo }}">
-                            {{ $livro->titulo }}
-                        </h4>
-                        <p class="text-biblioteca-600 text-sm truncate">
-                            @foreach($livro->autores as $autor)
-                                {{ $autor->nome }}@if(!$loop->last), @endif
-                            @endforeach
-                        </p>
-                        <p class="text-biblioteca-500 text-xs mt-2">
-                            {{ $livro->numero_downloads }} downloads
-                        </p>
-                    </div>
-                </div>
-            @endforeach
-        </div>
+        <h3 id="horror-title" class="text-2xl font-bold text-biblioteca-800 mb-6 flex items-center gap-2">
+            <i class="bi bi-mask"></i>
+            <span>Melhores do genêro: Horror</span>
+        </h3>
+        <section class="splide book-carousel" aria-labelledby="horror-title">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    @foreach($topHorror as $livro)
+                        <x-livro-card :livro="$livro" />
+                    @endforeach
+                </ul>
+            </div>
+        </section>
     </div>
 
     <div class="mt-12">
-        <h3 class="text-2xl font-bold text-biblioteca-800 mb-6">Melhores do genêro: Horror</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            @foreach($topHorror as $livro)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                    @if($livro->formatos->first()?->url)
-                        <img src="{{ $livro->formatos->first()->url }}"
-                             alt="Capa do livro {{ $livro->titulo }}"
-                             class="w-full object-cover aspect-[2/3]">
-                    @else
-                        <div class="w-full bg-biblioteca-100 aspect-[2/3] flex items-center justify-center">
-                            <i class="bi bi-book text-4xl text-biblioteca-400"></i>
-                        </div>
-                    @endif
-                    <div class="p-4">
-                        <h4 class="font-bold text-biblioteca-800 text-md truncate" title="{{ $livro->titulo }}">
-                            {{ $livro->titulo }}
-                        </h4>
-                        <p class="text-biblioteca-600 text-sm truncate">
-                            @foreach($livro->autores as $autor)
-                                {{ $autor->nome }}@if(!$loop->last), @endif
-                            @endforeach
-                        </p>
-                        <p class="text-biblioteca-500 text-xs mt-2">
-                            {{ $livro->numero_downloads }} downloads
-                        </p>
-                    </div>
-                </div>
-            @endforeach
-        </div>
+        <h3 id="ficcao-title" class="text-2xl font-bold text-biblioteca-800 mb-6 flex items-center gap-2">
+            <i class="bi bi-robot"></i>
+            <span>Melhores do genêro: Ficção</span>
+        </h3>
+        <section class="splide book-carousel" aria-labelledby="ficcao-title">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    @foreach($topFiccao as $livro)
+                        <x-livro-card :livro="$livro" />
+                    @endforeach
+                </ul>
+            </div>
+        </section>
     </div>
 
     <div class="mt-12">
-        <h3 class="text-2xl font-bold text-biblioteca-800 mb-6">Melhores do genêro: Ficção</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            @foreach($topFiccao as $livro)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                    @if($livro->formatos->first()?->url)
-                        <img src="{{ $livro->formatos->first()->url }}"
-                             alt="Capa do livro {{ $livro->titulo }}"
-                             class="w-full object-cover aspect-[2/3]">
-                    @else
-                        <div class="w-full bg-biblioteca-100 aspect-[2/3] flex items-center justify-center">
-                            <i class="bi bi-book text-4xl text-biblioteca-400"></i>
-                        </div>
-                    @endif
-                    <div class="p-4">
-                        <h4 class="font-bold text-biblioteca-800 text-md truncate" title="{{ $livro->titulo }}">
-                            {{ $livro->titulo }}
-                        </h4>
-                        <p class="text-biblioteca-600 text-sm truncate">
-                            @foreach($livro->autores as $autor)
-                                {{ $autor->nome }}@if(!$loop->last), @endif
-                            @endforeach
-                        </p>
-                        <p class="text-biblioteca-500 text-xs mt-2">
-                            {{ $livro->numero_downloads }} downloads
-                        </p>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-
-    <div class="mt-12">
-        <h3 class="text-2xl font-bold text-biblioteca-800 mb-6">Melhores do genêro: Ficção</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            @foreach($topHistoria as $livro)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                    @if($livro->formatos->first()?->url)
-                        <img src="{{ $livro->formatos->first()->url }}"
-                             alt="Capa do livro {{ $livro->titulo }}"
-                             class="w-full object-cover aspect-[2/3]">
-                    @else
-                        <div class="w-full bg-biblioteca-100 aspect-[2/3] flex items-center justify-center">
-                            <i class="bi bi-book text-4xl text-biblioteca-400"></i>
-                        </div>
-                    @endif
-                    <div class="p-4">
-                        <h4 class="font-bold text-biblioteca-800 text-md truncate" title="{{ $livro->titulo }}">
-                            {{ $livro->titulo }}
-                        </h4>
-                        <p class="text-biblioteca-600 text-sm truncate">
-                            @foreach($livro->autores as $autor)
-                                {{ $autor->nome }}@if(!$loop->last), @endif
-                            @endforeach
-                        </p>
-                        <p class="text-biblioteca-500 text-xs mt-2">
-                            {{ $livro->numero_downloads }} downloads
-                        </p>
-                    </div>
-                </div>
-            @endforeach
-        </div>
+        <h3 id="historia-title" class="text-2xl font-bold text-biblioteca-800 mb-6 flex items-center gap-2">
+            <i class="bi bi-book-half"></i>
+            <span>Melhores do genêro: História</span>
+        </h3>
+        <section class="splide book-carousel" aria-labelledby="historia-title">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    @foreach($topHistoria as $livro)
+                        <x-livro-card :livro="$livro" />
+                    @endforeach
+                </ul>
+            </div>
+        </section>
     </div>
 </div>
+
+<script>
+    document.addEventListener( 'DOMContentLoaded', function () {
+        var carousels = document.querySelectorAll('.book-carousel');
+
+        for (var i = 0; i < carousels.length; i++) {
+            new Splide( carousels[i], {
+
+                type: 'loop',
+
+                perPage: 7,
+
+                gap: '1.5rem',
+                pagination: false,
+                arrows: 'true',
+
+                breakpoints: {
+                    1024: { // Abaixo de 1024px (md)
+                        perPage: 5,
+                    },
+                    768: { // Abaixo de 768px (sm)
+                        perPage: 4,
+                    },
+                    640: { // Abaixo de 640px (mobile)
+                        perPage: 3,
+                    },
+                }
+            } ).mount();
+        }
+    } );
+</script>
