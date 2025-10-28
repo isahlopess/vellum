@@ -3,7 +3,7 @@
     <header class="bg-biblioteca-800 text-white shadow-lg sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
-                <a href="#" class="flex items-center space-x-3 group">
+                <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 group">
                     <div>
                         <img src="{{ asset('imagens/logo_icon_branco.png') }}" alt="Logo Vellum"
                              class="w-14 h-14 rounded-lg group-hover:scale-110 transition-transform duration-300">
