@@ -69,6 +69,16 @@ class Acervo extends Component
             ->get();
     }
 
+    public function updatedGenerosSelecionados():void
+    {
+        $this->resetPage();
+    }
+
+    public function updatedAutoresSelecionados():void
+    {
+        $this->resetPage();
+    }
+
     public function updating($key): void
     {
         if (in_array($key, ['busca', 'ordenar', 'generosSelecionados', 'autoresSelecionados'])) {

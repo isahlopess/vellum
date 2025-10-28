@@ -40,6 +40,16 @@
                         <li><a href="#" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2"><i class="bi bi-search mr-2"></i>Explorar</a></li>
                         <li><a href="#" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2"><i class="bi bi-bookmark mr-2"></i>Minha Estante</a></li>
                         <li><a href="#" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2"><i class="bi bi-person mr-2"></i>Perfil</a></li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}" id="logout-form" class="hidden">
+                                @csrf
+                            </form>
+                            <a href="#"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                               class="nav-link font-medium text-biblioteca-100 hover:text-white py-2">
+                                <i class="bi bi-box-arrow-right mr-2"></i>Sair
+                            </a>
+                        </li>
                     </ul>
                 </nav>
 
