@@ -16,11 +16,11 @@
                 </a>
 
                 <nav class="hidden md:block">
-                    <ul class="flex space-x-8">
+                    <ul class="flex space-x-8 items-center">
                         <li>
                             <a href="{{ route('dashboard') }}"
                                 @class([
-                                    'nav-link', 'font-medium', 'text-biblioteca-100', 'hover:text-white', 'py-2',
+                                    'nav-link font-medium text-biblioteca-100 hover:text-white py-2',
                                     'active-nav' => request()->routeIs('dashboard')
                                 ])>
                                 <i class="bi bi-house-door mr-2"></i>Tela Inicial
@@ -30,7 +30,7 @@
                         <li>
                             <a href="{{ route('acervo') }}"
                                 @class([
-                                    'nav-link', 'font-medium', 'text-biblioteca-100', 'hover:text-white', 'py-2',
+                                    'nav-link font-medium text-biblioteca-100 hover:text-white py-2',
                                     'active-nav' => request()->routeIs('acervo*')
                                 ])>
                                 <i class="bi bi-book mr-2"></i>Acervo
@@ -39,19 +39,31 @@
 
                         <li><a href="#" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2"><i class="bi bi-search mr-2"></i>Explorar</a></li>
                         <li><a href="#" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2"><i class="bi bi-bookmark mr-2"></i>Minha Estante</a></li>
-                        <li><a href="#" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2"><i class="bi bi-person mr-2"></i>Perfil</a></li>
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}" id="logout-form" class="hidden">
-                                @csrf
-                            </form>
-                            <a href="#"
-                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                               class="nav-link font-medium text-biblioteca-100 hover:text-white py-2">
-                                <i class="bi bi-box-arrow-right mr-2"></i>Sair
-                            </a>
+
+                        <li class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2 flex items-center space-x-2">
+                                <i class="bi bi-person mr-2"></i>
+                                <span>{{ auth()->user()->name }}</span>
+                                <i class="bi bi-caret-down-fill ml-1"></i>
+                            </button>
+
+                            <ul x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50 py-2">
+                                <li>
+                                    <a href="{{ route('profile') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Perfil</a>
+                                </li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Sair</button>
+                                    </form>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </nav>
+
+                <script src="//unpkg.com/alpinejs" defer></script>
+
 
                 <button id="mobile-menu-button" class="md:hidden text-biblioteca-100 hover:text-white">
                     <i class="bi bi-list text-2xl"></i>
