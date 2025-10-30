@@ -37,11 +37,9 @@
         <section class="splide book-carousel" aria-labelledby="downloads-title">
             <div class="splide__track">
                 <ul class="splide__list">
-
                     @foreach($topDownloads as $livro)
-                        <x-livro-card :livro="$livro" />
+                        <livewire:livro-card :livro="$livro" :key="$livro->id" />
                     @endforeach
-
                 </ul>
             </div>
         </section>
@@ -55,11 +53,9 @@
         <section class="splide book-carousel" aria-labelledby="aventura-title">
             <div class="splide__track">
                 <ul class="splide__list">
-
                     @foreach($topAventuras as $livro)
-                        <x-livro-card :livro="$livro" />
+                        <livewire:livro-card :livro="$livro" :key="$livro->id" />
                     @endforeach
-
                 </ul>
             </div>
         </section>
@@ -75,7 +71,7 @@
             <div class="splide__track">
                 <ul class="splide__list">
                     @foreach($topRomances as $livro)
-                        <x-livro-card :livro="$livro" />
+                        <livewire:livro-card :livro="$livro" :key="$livro->id" />
                     @endforeach
                 </ul>
             </div>
@@ -91,7 +87,7 @@
             <div class="splide__track">
                 <ul class="splide__list">
                     @foreach($topFantasias as $livro)
-                        <x-livro-card :livro="$livro" />
+                        <livewire:livro-card :livro="$livro" :key="$livro->id" />
                     @endforeach
                 </ul>
             </div>
@@ -107,7 +103,7 @@
             <div class="splide__track">
                 <ul class="splide__list">
                     @foreach($topHorror as $livro)
-                        <x-livro-card :livro="$livro" />
+                        <livewire:livro-card :livro="$livro" :key="$livro->id" />
                     @endforeach
                 </ul>
             </div>
@@ -123,7 +119,7 @@
             <div class="splide__track">
                 <ul class="splide__list">
                     @foreach($topFiccao as $livro)
-                        <x-livro-card :livro="$livro" />
+                        <livewire:livro-card :livro="$livro" :key="$livro->id" />
                     @endforeach
                 </ul>
             </div>
@@ -139,7 +135,9 @@
             <div class="splide__track">
                 <ul class="splide__list">
                     @foreach($topHistoria as $livro)
-                        <x-livro-card :livro="$livro" />
+                        <livewire:livro-card
+                            :livro="$livro"
+                            :key="$livro->id" />
                     @endforeach
                 </ul>
             </div>

@@ -3,10 +3,13 @@
 namespace App\Livewire;
 
 use App\Models\Livro;
-use Livewire\Component;
+use App\Models\LivroFavorito;
+use App\Services\CommumFunctions;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
-
+use Livewire\Component;
 #[Layout('components.layouts.menu')]
 #[Title('Tela Inicial')]
 class Dashboard extends Component
@@ -37,17 +40,28 @@ class Dashboard extends Component
             ->limit(15)
             ->get();
 
+        $this->carregarFavoritos($this->topDownloads);
+
         $this->topRomances = $this->buscarLivrosPorGenero('romance');
         $this->topFantasias = $this->buscarLivrosPorGenero('fantasia');
         $this->topAventuras = $this->buscarLivrosPorGenero('aventura');
         $this->topHorror = $this->buscarLivrosPorGenero('horror');
         $this->topFiccao = $this->buscarLivrosPorGenero('ficção');
         $this->topHistoria = $this->buscarLivrosPorGenero('históri');
+    }
 
+    private function carregarFavoritos($livros){
+        if (auth()->check()){
+            $commomFunctions = app(CommumFunctions::class);
+
+            foreach ($livros as $livro){
+                $commomFunctions->isFavorite($livro);
+            }
+        }
     }
 
     public function buscarLivrosPorGenero($genero) {
-        return Livro::select('id', 'livros.titulo', 'livros.numero_downloads')
+        $livros = Livro::select('id', 'livros.titulo', 'livros.numero_downloads')
             ->with([
                 'autores:id,nome',
                 'assuntos:id,nome',
@@ -60,6 +74,9 @@ class Dashboard extends Component
             })
             ->limit(15)
             ->get();
+        $this->carregarFavoritos($livros);
+
+        return $livros;
     }
     public function render()
     {
