@@ -1,30 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ $title ?? 'Vellum' }}</title>
 
+    <link rel="icon" href="{{ asset('imagens/logo_icon_branco.png') }}" type="image/png">
+    <link rel="apple-touch-icon" href="{{ asset('imagens/logo_icon_branco.png') }}">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        'biblioteca': {
-                            50: '#fdf8f3', 100: '#f7f0e6', 200: '#eeddc9',
-                            300: '#e2c5a3', 400: '#d2a274', 500: '#c08550',
-                            600: '#b27046', 700: '#945a3c', 800: '#774a36',
-                            900: '#613e2e',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         body { font-family: 'Georgia', serif; }
         .logo-text { font-family: 'Georgia', serif; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
