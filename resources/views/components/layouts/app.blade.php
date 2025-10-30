@@ -6,9 +6,6 @@
 
     <title>{{ $title ?? 'Vellum' }}</title>
 
-    <link rel="icon" href="{{ asset('imagens/logo_icon_branco.png') }}" type="image/png">
-    <link rel="apple-touch-icon" href="{{ asset('imagens/logo_icon.png') }}">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
