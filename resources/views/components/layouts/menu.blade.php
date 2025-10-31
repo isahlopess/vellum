@@ -62,9 +62,6 @@
                     </ul>
                 </nav>
 
-                <script src="//unpkg.com/alpinejs" defer></script>
-
-
                 <button id="mobile-menu-button" class="md:hidden text-biblioteca-100 hover:text-white">
                     <i class="bi bi-list text-2xl"></i>
                 </button>

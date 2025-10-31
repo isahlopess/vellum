@@ -11,6 +11,8 @@
     <link rel="apple-touch-icon" href="{{ asset('imagens/logo_icon_branco.png') }}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <script src="//unpkg.com/alpinejs" defer></script>
     <style>
         [x-cloak] { display: none !important; }
         body { font-family: 'Georgia', serif; }

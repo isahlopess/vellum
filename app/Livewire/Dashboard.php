@@ -10,6 +10,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+
 #[Layout('components.layouts.menu')]
 #[Title('Tela Inicial')]
 class Dashboard extends Component
@@ -27,6 +28,8 @@ class Dashboard extends Component
     public $topFiccao;
 
     public $topHistoria;
+
+    public $meusFavoritos;
 
     public function mount()
     {
@@ -48,6 +51,24 @@ class Dashboard extends Component
         $this->topHorror = $this->buscarLivrosPorGenero('horror');
         $this->topFiccao = $this->buscarLivrosPorGenero('ficção');
         $this->topHistoria = $this->buscarLivrosPorGenero('históri');
+
+        if (auth()->check()) {
+            $favoritoIds = LivroFavorito::where('user_id', auth()->id())->pluck('livro_id');
+
+            $this->meusFavoritos = Livro::select('id', 'livros.titulo', 'livros.numero_downloads')
+                ->with([
+                    'autores:id,nome',
+                    'assuntos:id,nome',
+                    'estantes:id,nome',
+                    'formatos:id,url,media_type,livro_id'
+                ])
+                ->whereIn('id', $favoritoIds)
+                ->get();
+
+            $this->carregarFavoritos($this->meusFavoritos);
+        } else {
+            $this->meusFavoritos = collect();
+        }
     }
 
     private function carregarFavoritos($livros){
