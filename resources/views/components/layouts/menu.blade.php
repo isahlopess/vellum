@@ -42,7 +42,17 @@
 
                         <li class="relative" x-data="{ open: false }">
                             <button @click="open = !open" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2 flex items-center space-x-2">
-                                <i class="bi bi-person mr-2"></i>
+
+                                @if (auth()->user()->profile_photo_path)
+                                    <img src="{{ asset('storage/' . auth()->user()->profile_photo_path) }}" alt="{{ auth()->user()->name }}" class="h-8 w-8 rounded-full object-cover">
+                                @else
+                                    <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-biblioteca-700">
+                                        <span class="text-sm font-medium text-white">
+                                            {{ substr(auth()->user()->name, 0, 1) }}
+                                        </span>
+                                    </span>
+                                @endif
+
                                 <span>{{ auth()->user()->name }}</span>
                                 <i class="bi bi-caret-down-fill ml-1"></i>
                             </button>

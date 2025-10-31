@@ -22,7 +22,6 @@ new class extends Component
 
 <section class="space-y-6">
     <header>
-        <!-- MUDANÇA: Estilo do cabeçalho para 'perigo' -->
         <h2 class="text-2xl font-bold text-red-700">
             {{ __('Excluir Conta') }}
         </h2>
@@ -40,7 +39,6 @@ new class extends Component
     <x-modal name="confirm-user-deletion" :show="$errors->isNotEmpty()" focusable>
         <form wire:submit="deleteUser" class="p-6">
 
-            <!-- MUDANÇA: Estilo do título do modal -->
             <h2 class="text-lg font-medium text-red-700">
                 {{ __('Você tem certeza que quer excluir sua conta?') }}
             </h2>
@@ -65,7 +63,6 @@ new class extends Component
             </div>
 
             <div class="mt-6 flex justify-end">
-                <!-- MUDANÇA: Cor do anel de foco -->
                 <x-secondary-button x-on:click="$dispatch('close')" class="focus:!ring-biblioteca-500">
                     {{ __('Cancelar') }}
                 </x-secondary-button>

@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,7 +13,10 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-    <script src="//unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" />
+
+    @livewireStyles
+
     <style>
         [x-cloak] { display: none !important; }
         body { font-family: 'Georgia', serif; }
@@ -20,9 +24,25 @@
         .nav-link { position: relative; transition: all 0.3s ease; }
         .nav-link:after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: #d2a274; transition: width 0.3s ease; }
         .nav-link:hover:after, .active-nav:after { width: 100%; }
+
+        .img-container {
+            width: 100%;
+            height: 400px;
+            background-color: #f7f7f7;
+        }
+        .img-container img {
+            display: block;
+            max-width: 100%;
+        }
     </style>
 </head>
 <body class="bg-biblioteca-50 text-biblioteca-900 min-h-screen flex flex-col">
+
     {{ $slot }}
+
+    @livewireScripts
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
 </body>
 </html>
+

@@ -35,7 +35,6 @@ new class extends Component
 
 <section>
     <header>
-        <!-- MUDANÇA: Estilo do cabeçalho -->
         <h2 class="text-2xl font-bold text-biblioteca-800">
             {{ __('Atualizar Senha') }}
         </h2>
@@ -65,14 +64,18 @@ new class extends Component
         </div>
 
         <div class="flex items-center gap-4">
-            <!-- MUDANÇA: Classes de botão (!) para sobrepor o padrão do Breeze -->
             <x-primary-button class="!bg-biblioteca-700 hover:!bg-biblioteca-800 focus:!bg-biblioteca-800 focus:!ring-biblioteca-500">
                 {{ __('Salvar') }}
             </x-primary-button>
 
-            <x-action-message class="me-3" on="password-updated">
+            <div x-data="{ shown: false, timeout: null }"
+                 @password-updated.window="shown = true; clearTimeout(timeout); timeout = setTimeout(() => { shown = false }, 2000)"
+                 x-show="shown"
+                 x-transition:leave.opacity.duration.1500ms
+                 style="display: none;"
+                 class="text-sm text-gray-600 me-3">
                 {{ __('Salvo.') }}
-            </x-action-message>
+            </div>
         </div>
     </form>
 </section>
