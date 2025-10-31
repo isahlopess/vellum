@@ -177,7 +177,7 @@
 <script>
     // Opções padrão para todos os carrosséis
     var splideOptions = {
-        type: 'loop',
+        type: 'slide',
         perPage: 7,
         gap: '1.5rem',
         pagination: false,

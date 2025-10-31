@@ -4,8 +4,10 @@ namespace App\Livewire;
 
 use App\Models\Livro;
 use App\Models\LivroFavorito;
-use Illuminate\Support\Collection;
+use App\Services\CommumFunctions;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -13,71 +15,90 @@ use Livewire\Component;
 #[Title('Tela Inicial')]
 class Dashboard extends Component
 {
-    public Collection $topDownloads;
-    public Collection $topRomances;
-    public Collection $topFantasias;
-    public Collection $topAventuras;
-    public Collection $topHorror;
-    public Collection $topFiccao;
-    public Collection $topHistoria;
-    public Collection $meusFavoritos;
+    public $topDownloads;
+
+    public $topRomances;
+
+    public $topFantasias;
+
+    public $topAventuras;
+
+    public $topHorror;
+
+    public $topFiccao;
+
+    public $topHistoria;
+
+    public $meusFavoritos;
 
     public function mount()
     {
-        $this->loadLivros();
-    }
-
-    private function loadLivros()
-    {
-        $withRelations = [
-            'autores:id,nome',
-            'assuntos:id,nome',
-            'estantes:id,nome',
-            'formatos:id,url,media_type,livro_id'
-        ];
-
-        $this->topDownloads = $this->getLivrosQuery($withRelations)
+        $this->topDownloads = Livro::select('id', 'livros.titulo', 'livros.numero_downloads')
+            ->with(['autores:id,nome',
+                'assuntos:id,nome',
+                'estantes:id,nome',
+                'formatos:id,url,media_type,livro_id'
+            ])
             ->orderBy('livros.numero_downloads', 'DESC')
             ->limit(15)
             ->get();
 
-        $this->topRomances = $this->getLivrosPorGenero('romance');
-        $this->topFantasias = $this->getLivrosPorGenero('fantasia');
-        $this->topAventuras = $this->getLivrosPorGenero('aventura');
-        $this->topHorror = $this->getLivrosPorGenero('horror');
-        $this->topFiccao = $this->getLivrosPorGenero('ficção');
-        $this->topHistoria = $this->getLivrosPorGenero('história');
+        $this->carregarFavoritos($this->topDownloads);
 
-        $this->meusFavoritos = auth()->check()
-            ? $this->getFavoritosUsuario(auth()->id())
-            : collect();
+        $this->topRomances = $this->buscarLivrosPorGenero('romance');
+        $this->topFantasias = $this->buscarLivrosPorGenero('fantasia');
+        $this->topAventuras = $this->buscarLivrosPorGenero('aventura');
+        $this->topHorror = $this->buscarLivrosPorGenero('horror');
+        $this->topFiccao = $this->buscarLivrosPorGenero('ficção');
+        $this->topHistoria = $this->buscarLivrosPorGenero('históri');
+
+        if (auth()->check()) {
+            $favoritoIds = LivroFavorito::where('user_id', auth()->id())->pluck('livro_id');
+
+            $this->meusFavoritos = Livro::select('id', 'livros.titulo', 'livros.numero_downloads')
+                ->with([
+                    'autores:id,nome',
+                    'assuntos:id,nome',
+                    'estantes:id,nome',
+                    'formatos:id,url,media_type,livro_id'
+                ])
+                ->whereIn('id', $favoritoIds)
+                ->get();
+
+            $this->carregarFavoritos($this->meusFavoritos);
+        } else {
+            $this->meusFavoritos = collect();
+        }
     }
 
-    private function getLivrosQuery(array $withRelations = [])
-    {
-        return Livro::select('id', 'titulo', 'numero_downloads')
-            ->with($withRelations);
+    private function carregarFavoritos($livros){
+        if (auth()->check()){
+            $commomFunctions = app(CommumFunctions::class);
+
+            foreach ($livros as $livro){
+                $commomFunctions->isFavorite($livro);
+            }
+        }
     }
 
-    private function getLivrosPorGenero(string $genero)
-    {
-        return $this->getLivrosQuery()
-            ->whereHas('estantes', fn($q) => $q->where('nome', 'like', "%{$genero}%"))
-            ->orderBy('numero_downloads', 'DESC')
+    public function buscarLivrosPorGenero($genero) {
+        $livros = Livro::select('id', 'livros.titulo', 'livros.numero_downloads')
+            ->with([
+                'autores:id,nome',
+                'assuntos:id,nome',
+                'estantes:id,nome',
+                'formatos:id,url,media_type,livro_id'
+            ])
+            ->orderBy('livros.numero_downloads', 'DESC')
+            ->whereHas('estantes', function ($query) use ($genero) {
+                $query->where('nome', 'like', "%$genero%");
+            })
             ->limit(15)
             ->get();
+        $this->carregarFavoritos($livros);
+
+        return $livros;
     }
-
-    private function getFavoritosUsuario($userId)
-    {
-        $favoritoIds = LivroFavorito::where('user_id', $userId)
-            ->pluck('livro_id');
-
-        return $this->getLivrosQuery()
-            ->whereIn('id', $favoritoIds)
-            ->get();
-    }
-
     public function render()
     {
         return view('livewire.dashboard');
