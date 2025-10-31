@@ -38,7 +38,7 @@
                         </li>
 
                         <li><a href="#" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2"><i class="bi bi-search mr-2"></i>Explorar</a></li>
-                        <li><a href="#" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2"><i class="bi bi-bookmark mr-2"></i>Minha Estante</a></li>
+                        <li><a href="{{ route('minha_estante') }}" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2"><i class="bi bi-bookmark mr-2"></i>Minha Estante</a></li>
 
                         <li class="relative" x-data="{ open: false }">
                             <button @click="open = !open" class="nav-link font-medium text-biblioteca-100 hover:text-white py-2 flex items-center space-x-2">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Actions\Logout;
+use App\Livewire\MinhaEstante;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Dashboard;
 use App\Livewire\Acervo;
@@ -22,6 +23,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/acervo', Acervo::class)
         ->name('acervo');
+
+    Route::get('/minha_estante', MinhaEstante::class)
+        ->name('minha_estante');
+
 
 
     Route::view('profile', 'profile')
