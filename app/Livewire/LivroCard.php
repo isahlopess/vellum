@@ -11,7 +11,8 @@ class LivroCard extends Component
     public $isFavorito;
     public $livroId;
     public $size = 'default';
-    public $showModal;
+    public $livroModal;
+    public $showModal = false;
 
     public function mount($livro)
     {
@@ -49,6 +50,15 @@ class LivroCard extends Component
             );
         }
     }
+    public function openModal($livroId, LivroDetalhes $livroDetalhes){
+        $this->showModal = true;
+        $livroDetalhes->mostrarDetalhes($livroId);
+
+    }
+    public function closeModal(){
+        $this->showModal = false;
+    }
+
 
     private function checkFavoriteStatus()
     {

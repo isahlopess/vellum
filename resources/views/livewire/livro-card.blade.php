@@ -48,7 +48,7 @@
                     @endauth
 
                     <button
-                        wire:click="$toggle('showModal')"
+                        wire:click="openModal({{ $livro->id }})"
                         class="bg-biblioteca-500 hover:bg-biblioteca-600 text-white px-3 py-1 rounded text-sm transition-colors"
                     >
                         Detalhes
@@ -59,25 +59,6 @@
     </a>
 
     @if($showModal)
-        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-xl font-bold text-biblioteca-800">Detalhes do Livro</h3>
-                        <button
-                            wire:click="$set('showModal', false)"
-                            class="text-gray-500 hover:text-gray-700 text-2xl"
-                        >
-                            &times;
-                        </button>
-                    </div>
-
-                    <div class="text-center py-8">
-                        <p class="text-2xl">oi</p>
-                        <p class="text-gray-600 mt-2">testeteste</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('livewire.livro-detalhes')
     @endif
 </li>

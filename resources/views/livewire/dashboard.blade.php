@@ -45,43 +45,24 @@
     </div>
 
     <div class="mt-12">
-        <h3 id="estante-title" class="text-2xl font-bold text-biblioteca-800 mb-6 flex items-center gap-2">
-            <i class="bi bi-bookmark-star"></i>
-            <span>Sua Estante (Favoritos)</span>
-        </h3>
-        <section class="splide book-carousel" id="estante-splide" data-count="{{ $meusFavoritos->count() }}" aria-labelledby="estante-title">
-            <div class="splide__track pt-4">
-                <ul class="splide__list">
-                    @forelse($meusFavoritos as $livro)
-                        <livewire:livro-card :livro="$livro" :key="'fav-'.$livro->id" />
-                    @empty
-                        <li class="splide__slide flex items-center justify-center">
-                            <div class="text-center p-6 bg-white rounded-lg shadow-sm">
-                                <i class="bi bi-bookmark-x text-4xl text-biblioteca-400 mb-3"></i>
-                                <p class="text-biblioteca-600">Sua estante está vazia.</p>
-                                <p class="text-sm text-biblioteca-500">Clique no <i class="bi bi-heart"></i> nos livros para favoritar.</p>
-                            </div>
-                        </li>
-                    @endforelse
-                </ul>
-            </div>
-        </section>
-    </div>
-
-    <div class="mt-12">
         <h3 id="downloads-title" class="text-2xl font-bold text-biblioteca-800 mb-6 flex items-center gap-2">
             <i class="bi bi-graph-up"></i>
             <span>Top Livros com + Downloads</span>
         </h3>
-        <section class="splide book-carousel" aria-labelledby="downloads-title">
-            <div class="splide__track pt-4">
-                <ul class="splide__list">
-                    @foreach($topDownloads as $livro)
-                        <livewire:livro-card :livro="$livro" :key="$livro->id" />
-                    @endforeach
-                </ul>
-            </div>
-        </section>
+        <div wire:ignore>
+            <section class="splide book-carousel" aria-labelledby="downloads-title">
+                <div class="splide__track pt-4">
+                    <ul class="splide__list">
+                        @foreach($topDownloads as $livro)
+                            <livewire:livro-card
+                                :livro="$livro"
+                                :key="$livro->id"
+                            />
+                        @endforeach
+                    </ul>
+                </div>
+            </section>
+        </div>
     </div>
 
     <div class="mt-12" x-data="tabsManager()">
@@ -185,7 +166,13 @@
             </section>
         </div>
     </div>
+    <div class="mx-auto">
+        <div class="mt-12" x-data="tabsManager()">
+        </div>
+    </div>
+
 </div>
+
 
 <script>
     // Opções padrão para todos os carrosséis
@@ -202,7 +189,6 @@
         }
     };
 
-    // Rastreador para carrosséis de abas (evita montar várias vezes)
     var mountedSplides = {};
 
     // 1. Inicializa os carrosséis FORA das abas
@@ -211,31 +197,7 @@
 
         for (var i = 0; i < standardCarousels.length; i++) {
             var el = standardCarousels[i];
-            var options = { ...splideOptions }; // Copia opções padrão
-
-            // *** INÍCIO DA NOVA LÓGICA PARA FAVORITOS ***
-            // Verifica se este é o carrossel de favoritos
-            if (el.id === 'estante-splide') {
-                var favCount = parseInt(el.getAttribute('data-count')) || 0;
-                var perPage = options.perPage || 7;
-
-                // Se houver menos itens que 'perPage' (ou 0), desliga o loop
-                if (favCount <= perPage) {
-                    options.type = 'slide';
-                    options.pagination = false;
-
-                    if (favCount === 0) {
-                        options.perPage = 1;
-                        options.arrows = false;
-                        options.drag = false;
-                        el.querySelector('.splide__list').classList.add('flex', 'justify-center');
-                    } else {
-                        options.perPage = favCount;
-                        options.arrows = favCount > 1;
-                        options.drag = true;
-                    }
-                }
-            }
+            var options = { ...splideOptions };
 
             new Splide(el, options).mount();
         }
