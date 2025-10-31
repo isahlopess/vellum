@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <a href="#" class="text-center inline-block bg-biblioteca-700 text-white px-8 py-2 rounded-lg font-medium hover:bg-biblioteca-800 transition-colors duration-300">
+            <a href="{{ route('clube-do-livro') }}" class="text-center inline-block bg-biblioteca-700 text-white px-8 py-2 rounded-lg font-medium hover:bg-biblioteca-800 transition-colors duration-300">
                 Participar
             </a>
         </div>
