@@ -34,4 +34,9 @@ class Livro extends Model
     public function livrosFavoritos() {
         return $this->hasMany(LivroFavorito::class);
     }
+
+    public function clubeSessoes()
+    {
+        return $this->hasMany(ClubeSessao::class);
+    }
 }

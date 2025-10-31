@@ -19,11 +19,15 @@
                 </h4>
 
                 <p class="text-biblioteca-600 {{ $size === 'large' ? 'text-base' : 'text-sm' }} truncate">
-                    @if(is_array($livro))
-                        {{ collect($livro['autores'] ?? [])->pluck('nome')->implode(', ') }}
-                    @else
-                        {{ $livro->autores->pluck('nome')->implode(', ') }}
-                    @endif
+                    @php
+                        if (is_array($livro)) {
+                            $autores = collect($livro['autores'] ?? [])->pluck('nome')->implode(', ');
+                        } else {
+                            $autores = $livro->autores->pluck('nome')->implode(', ');
+                        }
+                    @endphp
+                <p class="text-biblioteca-600 {{ $size === 'large' ? 'text-base' : 'text-sm' }} truncate" title="{{ $autores ?: 'Não identificado' }}">
+                    {{ $autores ?: 'Não identificado' }}
                 </p>
 
                 <p class="text-biblioteca-500 {{ $size === 'large' ? 'text-sm' : 'text-xs' }} mt-2">
