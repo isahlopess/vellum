@@ -3,7 +3,9 @@
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 
 <div class="mx-auto">
-    <h2 class="text-3xl font-bold text-biblioteca-800 mb-6 text-center">Bem-vindo à Biblioteca Vellum!</h2>
+    <h2 class="text-3xl font-bold text-biblioteca-800 mb-6 text-center">
+        Bem-vindo(a), {{ explode(' ', auth()->user()->name)[0] }}!
+    </h2>
     <div class="bg-white rounded-xl shadow-md p-6 mb-8 border border-biblioteca-200 text-center">
         <p class="text-lg text-biblioteca-700 mb-4">Explore nosso acervo, participe de clubes do livro e encontre sua próxima grande leitura.</p>
         <p class="text-biblioteca-600">Comece navegando pelas seções abaixo ou use a barra de busca no menu para encontrar algo específico.</p>
@@ -35,7 +37,7 @@
             <span>Top Livros com + Downloads</span>
         </h3>
         <section class="splide book-carousel" aria-labelledby="downloads-title">
-            <div class="splide__track">
+            <div class="splide__track pt-4">
                 <ul class="splide__list">
                     @foreach($topDownloads as $livro)
                         <livewire:livro-card :livro="$livro" :key="$livro->id" />
@@ -51,7 +53,7 @@
             <span>Melhores do genêro: Aventura</span>
         </h3>
         <section class="splide book-carousel" aria-labelledby="aventura-title">
-            <div class="splide__track">
+            <div class="splide__track pt-4">
                 <ul class="splide__list">
                     @foreach($topAventuras as $livro)
                         <livewire:livro-card :livro="$livro" :key="$livro->id" />
@@ -68,7 +70,7 @@
             <span>Melhores do genêro: Romance</span>
         </h3>
         <section class="splide book-carousel" aria-labelledby="romance-title">
-            <div class="splide__track">
+            <div class="splide__track pt-4">
                 <ul class="splide__list">
                     @foreach($topRomances as $livro)
                         <livewire:livro-card :livro="$livro" :key="$livro->id" />
@@ -84,7 +86,7 @@
             <span>Melhores do genêro: Fantasia</span>
         </h3>
         <section class="splide book-carousel" aria-labelledby="fantasia-title">
-            <div class="splide__track">
+            <div class="splide__track pt-4">
                 <ul class="splide__list">
                     @foreach($topFantasias as $livro)
                         <livewire:livro-card :livro="$livro" :key="$livro->id" />
@@ -100,7 +102,7 @@
             <span>Melhores do genêro: Horror</span>
         </h3>
         <section class="splide book-carousel" aria-labelledby="horror-title">
-            <div class="splide__track">
+            <div class="splide__track pt-4">
                 <ul class="splide__list">
                     @foreach($topHorror as $livro)
                         <livewire:livro-card :livro="$livro" :key="$livro->id" />
@@ -116,7 +118,7 @@
             <span>Melhores do genêro: Ficção</span>
         </h3>
         <section class="splide book-carousel" aria-labelledby="ficcao-title">
-            <div class="splide__track">
+            <div class="splide__track pt-4">
                 <ul class="splide__list">
                     @foreach($topFiccao as $livro)
                         <livewire:livro-card :livro="$livro" :key="$livro->id" />
@@ -132,7 +134,7 @@
             <span>Melhores do genêro: História</span>
         </h3>
         <section class="splide book-carousel" aria-labelledby="historia-title">
-            <div class="splide__track">
+            <div class="splide__track pt-4">
                 <ul class="splide__list">
                     @foreach($topHistoria as $livro)
                         <livewire:livro-card

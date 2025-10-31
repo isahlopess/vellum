@@ -1,13 +1,13 @@
 <li class="splide__slide" wire:ignore.self>
-    <a class="block h-full group">
-        <div class="bg-white rounded-lg shadow-md overflow-hidden group-hover:shadow-lg transition-shadow duration-300 h-full {{ $size === 'large' ? 'max-w-xs' : '' }}">
+    <a class="block h-full group relative transition-all duration-300 hover:scale-105 hover:z-20">
+        <div class="bg-white rounded-lg shadow-md overflow-visible group-hover:shadow-lg transition-shadow duration-300 h-full {{ $size === 'large' ? 'max-w-xs' : '' }}">
 
             @if(($livro['formatos'][0]['url'] ?? $livro->formatos->first()->url ?? null))
                 <img src="{{ $livro['formatos'][0]['url'] ?? $livro->formatos->first()->url }}"
                      alt="Capa do livro {{ $livro['titulo'] ?? $livro->titulo }}"
-                     class="w-full object-cover aspect-[2/3] {{ $size === 'large' ? 'group-hover:scale-105 transition-transform duration-300' : '' }}">
+                     class="w-full object-cover aspect-[2/3] rounded-t-lg">
             @else
-                <div class="w-full bg-biblioteca-100 aspect-[2/3] flex items-center justify-center {{ $size === 'large' ? 'group-hover:scale-105 transition-transform duration-300' : '' }}">
+                <div class="w-full bg-biblioteca-100 aspect-[2/3] flex items-center justify-center rounded-t-lg">
                     <i class="bi bi-book text-4xl text-biblioteca-400"></i>
                 </div>
             @endif

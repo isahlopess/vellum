@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
+        [x-cloak] { display: none !important; }
         body { font-family: 'Georgia', serif; }
         .logo-text { font-family: 'Georgia', serif; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
         .nav-link { position: relative; transition: all 0.3s ease; }
