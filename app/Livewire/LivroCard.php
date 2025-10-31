@@ -11,6 +11,7 @@ class LivroCard extends Component
     public $isFavorito;
     public $livroId;
     public $size = 'default';
+    public $showModal;
 
     public function mount($livro)
     {

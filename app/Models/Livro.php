@@ -11,7 +11,7 @@ class Livro extends Model
         'resumo',
         'numero_downloads'
     ];
-    
+
     public function autores() {
         return $this->belongsToMany(Autor::class);
     }
@@ -30,5 +30,8 @@ class Livro extends Model
 
     public function formatos() {
         return $this->hasMany(Formato::class);
+    }
+    public function livrosFavoritos() {
+        return $this->hasMany(LivroFavorito::class);
     }
 }
