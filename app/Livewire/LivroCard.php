@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Services\CommumFunctions;
 use Livewire\Component;
+use Livewire\Attributes\On; 
 
 class LivroCard extends Component
 {
@@ -11,14 +12,11 @@ class LivroCard extends Component
     public $isFavorito;
     public $livroId;
     public $size = 'default';
-    public $livroModal;
-    public $showModal = false;
 
     public function mount($livro)
     {
         $this->livro = $livro;
         $this->livroId = is_array($livro) ? $livro['id'] : $livro->id;
-
         $this->checkFavoriteStatus();
     }
 
@@ -33,7 +31,6 @@ class LivroCard extends Component
 
             if ($result['success']) {
                 $this->isFavorito = !$this->isFavorito;
-
                 $this->dispatch('favorite-updated',
                     message: $result['message'],
                     isFavorito: $this->isFavorito
@@ -50,15 +47,12 @@ class LivroCard extends Component
             );
         }
     }
-    public function openModal($livroId, LivroDetalhes $livroDetalhes){
-        $this->showModal = true;
-        $livroDetalhes->mostrarDetalhes($livroId);
 
+    public function openModal($livroId)
+    {
+        $this->dispatch('openLivroModal', livroId: $livroId);
     }
-    public function closeModal(){
-        $this->showModal = false;
-    }
-
+    
 
     private function checkFavoriteStatus()
     {

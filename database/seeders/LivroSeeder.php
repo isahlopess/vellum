@@ -59,7 +59,7 @@ class LivroSeeder extends Seeder
                 }
                 foreach($livro['subjects'] as $assuntoData){
                     $assunto = Assunto::firstOrCreate(['nome' => $this->traduzirTexto($assuntoData)]);
-                    $livroCriado->assuntos()->attach($assunto->id);
+                    $livroCriado->assuntos()->syncWithoutDetaching([$assunto->id]);
                 }
                 foreach ($livro['formats'] as $mediaType => $url) {
                     if (str_contains($mediaType, 'image/jpeg')) {

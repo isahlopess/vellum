@@ -1,5 +1,5 @@
 <li class="splide__slide list-none" wire:ignore.self>
-    <a class="block h-full group relative transition-all duration-300 hover:scale-105 hover:z-20">
+    <div class="block h-full group relative transition-all duration-300">
         <div class="bg-white rounded-lg shadow-md overflow-visible group-hover:shadow-lg transition-shadow duration-300 h-full {{ $size === 'large' ? 'max-w-xs' : '' }}">
 
             @if(($livro['formatos'][0]['url'] ?? $livro->formatos->first()->url ?? null))
@@ -52,7 +52,7 @@
                     @endauth
 
                     <button
-                        wire:click="openModal({{ $livro->id }})"
+                        wire:click="openModal({{ $livro['id'] }})"
                         class="bg-biblioteca-500 hover:bg-biblioteca-600 text-white px-3 py-1 rounded text-sm transition-colors"
                     >
                         Detalhes
@@ -60,9 +60,4 @@
                 </div>
             </div>
         </div>
-    </a>
-
-    @if($showModal)
-        @include('livewire.livro-detalhes')
-    @endif
-</li>
+    </div> </li>

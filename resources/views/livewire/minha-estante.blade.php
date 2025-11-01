@@ -60,4 +60,5 @@
             </div>
         </main>
     </div>
+    <livewire:livro-detalhes />
 </div>

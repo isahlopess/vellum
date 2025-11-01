@@ -170,7 +170,7 @@
         <div class="mt-12" x-data="tabsManager()">
         </div>
     </div>
-
+<livewire:livro-detalhes />
 </div>
 
 
