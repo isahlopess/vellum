@@ -68,7 +68,7 @@ Este projeto demonstra funcionalidades modernas do Laravel, incluindo componente
 
    ```bash
   # 1. Clone o repositório
-git clone https://github.com/seu-usuario/vellum.git
+git clone https://github.com/isahlopess/vellum.git
 cd vellum
 
 # 2. Instale as dependências PHP e JavaScript
