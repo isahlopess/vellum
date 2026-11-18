@@ -1,100 +1,92 @@
-## 📚 Sobre o Vellum
+# 📚 Vellum
 
-**Vellum** é um sistema completo de biblioteca virtual construído com o **TALL stack** (Tailwind, Alpine.js, Livewire, Laravel). A plataforma permite aos usuários explorar um vasto acervo de livros integrado com a API Gutendex, gerenciar perfis, participar de um clube do livro interativo e muito mais.
+**Vellum** is a full-featured virtual library platform built with the **TALL stack** (Tailwind CSS, Alpine.js, Livewire, Laravel). It allows users to explore an extensive catalog of books integrated with the Gutendex API, manage their profiles, participate in an interactive book club, and more.
 
-Este projeto demonstra funcionalidades modernas do Laravel, incluindo componentes Livewire (Volt), upload de arquivos, relações de banco de dados e interação dinâmica com JavaScript.
+This project demonstrates modern Laravel capabilities, including Livewire (Volt) components, file uploads with cropping, relational database modeling, and reactive JavaScript interactions.
 
-## 🚀 Funcionalidades Principais
+---
 
-### 🔐 Autenticação Completa
-- Sistema de login, registro e gerenciamento de perfil
-- Design customizado Vellum
+## 🚀 Key Features
 
-### 📊 Dashboard Dinâmico
-- Saudações personalizadas
-- Carrosséis com Splide.js para "Top Downloads", "Favoritos" e "Gêneros"
+### 🔐 Authentication & Account Management
+- Custom Vellum login, registration, and profile management flow
 
-### 🔍 Exploração de Livros
-- Sistema de abas para gêneros com Alpine.js
-- Filtro de tags (Gêneros Principais e Outras Tags)
+### 📊 Dynamic Dashboard
+- Personalized user greetings
+- Interactive carousels powered by Splide.js for **Top Downloads**, **Favorites**, and **Genres**
 
-### 📖 Modal de Detalhes do Livro
-- Resumo, autores e capa
-- Sistema de avaliação por estrelas (1-5) com recálculo automático
-- Botão de favoritos com atualização em tempo real
+### 🔍 Book Discovery
+- Genre tab navigation built with Alpine.js
+- Tag filtering (Main Genres and Additional Tags)
 
-### 👤 Gerenciamento de Perfil
-- Atualização de nome e e-mail
-- Upload de foto com recorte (Cropper.js)
-- Exclusão segura de conta
+### 📖 Book Details Modal
+- Synopsis, authors, and book cover preview
+- 1–5 star rating system with automatic average recalculation
+- Real-time favorites toggle
 
-### 📚 Clube do Livro Interativo
-- Sistema de inscrição (Entrar/Sair)
-- Livro do mês e histórico de leituras
-- Fórum de discussão com comentários
+### 👤 Profile Management
+- Update name and email
+- Profile picture upload with interactive cropping (Cropper.js)
+- Secure account deletion
 
-### 🔄 Integração e Componentes
-- API Gutendex para dados de livros
-- Componentes reativos com atualização em tempo real
+### 📚 Interactive Book Club
+- Join/Leave club membership
+- Book of the month and reading history
+- Discussion forum with comments
 
-## 🛠️ Tecnologias Utilizadas
+### 🔄 External Integration
+- Live book metadata fetched from the **Gutendex API**
+- Reactive UI updates powered by Livewire
 
-**Backend:**
-- Laravel 11
-- PHP 8.2+
+---
 
-**Frontend:**
-- Livewire 3 (Volt)
-- Blade Templates
-- Tailwind CSS
-- Alpine.js
+## 🛠️ Tech Stack
 
-**Bibliotecas JavaScript:**
-- Splide.js (carrosséis)
-- Cropper.js (recorte de imagens)
+- **Backend:** Laravel 11, PHP 8.2+
+- **Frontend:** Livewire 3 (Volt), Blade Templates, Tailwind CSS, Alpine.js
+- **JavaScript Libraries:** Splide.js (carousels), Cropper.js (image cropping)
+- **Database:** MySQL / PostgreSQL with Eloquent ORM
 
-**Banco de Dados:**
-- MySQL/PostgreSQL com Eloquent ORM
+---
 
-## 📦 Instalação
+## 📦 Local Setup
 
-### Pré-requisitos
+### Prerequisites
 - PHP >= 8.2
 - Composer
 - Node.js & npm
-- Banco de dados (MySQL, PostgreSQL, etc.)
+- MySQL or PostgreSQL
 
-### Passos de Instalação
+### Installation
 
-   ```bash
-  # 1. Clone o repositório
-git clone https://github.com/seu-usuario/vellum.git
+```bash
+# 1. Clone the repository
+git clone https://github.com/isahlopess/vellum.git
 cd vellum
 
-# 2. Instale as dependências PHP e JavaScript
+# 2. Install PHP and JavaScript dependencies
 composer install
 npm install
 
-# 3. Configure o ambiente
+# 3. Set up environment variables
 cp .env.example .env
 php artisan key:generate
 
-# 4. Configure o arquivo .env com suas credenciais do banco
-# Edite: DB_DATABASE, DB_USERNAME, DB_PASSWORD
+# 4. Configure your database credentials in .env
+# Edit: DB_DATABASE, DB_USERNAME, DB_PASSWORD
 
-# 5. Execute as migrações do banco
+# 5. Run database migrations
 php artisan migrate
 
-# 6. Crie o link simbólico para storage
+# 6. Create the storage symlink
 php artisan storage:link
 
-# 7. (Opcional) Popule o banco com dados iniciais
+# 7. (Optional) Seed initial data
 php artisan db:seed
 
-# 8. Compile os assets
+# 8. Compile frontend assets
 npm run dev
 
-# 9. Inicie o servidor de desenvolvimento
+# 9. Start the development server
 php artisan serve
-   ``` 
-   
+```
